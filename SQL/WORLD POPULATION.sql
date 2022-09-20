@@ -1,0 +1,42 @@
+CREATE DATABASE POPULATION
+USE POPULATION
+SELECT * FROM WORLD_POPULATION
+CREATE TABLE WORLD_POPULATION(
+country	VARCHAR(20),
+area INT,
+birth_rate	INT,
+death_rate	INT,
+infant_mortality_rate INT,
+internet_users	INT,
+life_exp_at_birth	INT,
+maternal_mortality_rate	INT,
+net_migration_rate	INT,
+population	INT,
+population_growth_rate INT
+)
+
+---------------------------------------------COUNTRY WITH HIGHEST POPULATION----------------------------------
+----------------------------IGNORE COUNTRY WITH POPULATION AS NA (REPLACED WITH 0 FOR EASY ANALYSIS)----------
+
+		SELECT COUNTRY,MAX(POPULATION) FROM WORLD_POPULATION 
+		WHERE POPULATION = (SELECT MAX(POPULATION) FROM WORLD_POPULATION)
+
+--------------------------------------------COUNTRY WITH LOWEST POPULATION------------------------------------
+		SELECT COUNTRY,MAX(POPULATION) FROM WORLD_POPULATION 
+		WHERE POPULATION = (SELECT MIN(NULLIF(POPULATION,0)) FROM WORLD_POPULATION)
+        
+-------------------------------------------COUNTRY WITH HIGHEST GROWTH RATE------------------------------------        
+		SELECT COUNTRY,MAX(POPULATION_GROWTH_RATE) AS MAX_GROWTH_RATE FROM WORLD_POPULATION 
+		WHERE POPULATION_GROWTH_RATE = (SELECT MAX(POPULATION_GROWTH_RATE) FROM WORLD_POPULATION)     
+
+
+-------------------------------------------MOST DENSELY POPULATED COUNTRY ------------------------------------ 
+		
+		SELECT COUNTRY,MAX(POPULATION/AREA) AS MAX_POPULATION_DENSITY FROM
+        WORLD_POPULATION
+        WHERE (POPULATION/AREA) = (SELECT MAX(POPULATION/AREA) FROM WORLD_POPULATION)
+        
+-------------------------------------------COUNTRY WITH MOST INTERNET USER ------------------------------------ 
+        SELECT COUNTRY,MAX(INTERNET_USERS) AS MAX_USERS FROM WORLD_POPULATION
+        WHERE INTERNET_USERS = (SELECT MAX(INTERNET_USERS) FROM WORLD_POPULATION)
+         
