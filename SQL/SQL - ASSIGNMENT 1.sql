@@ -18,6 +18,7 @@ GROUP BY PRODUCTS
 
 
 ---------------------------TASK 2: TELECOMMUNICATION COMPANY--------------------------------------------------
+--------------------------WRITE A QUERY TO FIND OUT ALL CLIENTS WHO HAVE TALKED FOR ATLEAST 10 MINUTES--------
 CREATE TABLE PHONES(
 NAME VARCHAR(20) NOT NULL UNIQUE,
 PH_NO INT NOT NULL UNIQUE)
@@ -91,7 +92,8 @@ SELECT NAME FROM T4 WHERE TOTAL_DURATION >= 10
 
 
 
----------------------------TASK 3: BANK TRANSACTION--------------------------------------------------
+------------------------------------------TASK 3: BANK TRANSACTION-----------------------------------
+---------------------------CALCULATING FINAL BALANCE AFTER DEDUCTING CREDIT CARD CHARGES-------------
 
 CREATE TABLE `TRANSACTION`(
 AMOUNT INT NOT NULL,
@@ -174,7 +176,8 @@ SELECT
 (SELECT SUM(AMOUNT) AS TOTAL_AMOUNT FROM TRANSACTION1) -(SELECT (12-COUNT(*))*5 as credit_charges FROM CHARGES1 WHERE CREDIT_CHARGES = 0)
 AS BALANCE
 
----------------------------TASK 3.2: BANK TRANSACTION--------------------------------------------------
+------------------------------------------TASK 3.2: BANK TRANSACTION--------------------------------------------------
+
 CREATE TABLE TRANSACTION2(
 AMOUNT INT NOT NULL,
 TR_DATE DATE NOT NULL
